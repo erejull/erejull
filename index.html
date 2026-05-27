@@ -28,7 +28,7 @@
     
     <br><br>
     
-    <!-- ===== КНОПКИ ПЕРЕНЕСЕНЫ ВНИЗ (ПОД КАРТИНКУ) ===== -->
+    <!-- ===== КНОПКИ НАВИГАЦИИ ===== -->
     <a href="about.html" class="button-about">❤️ Узнать обо мне</a>
     <a href="favorites.html" class="button-favorites">⭐ Мои любимые фильмы и песни</a>
 
@@ -45,36 +45,38 @@
             document.querySelector('img').src = images[currentImage];
         }
     </script>
-<br><br>
-<div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 20px; width: 80%; max-width: 400px;">
-    <h3>📝 Гостевая книга</h3>
-    <input type="text" id="messageInput" placeholder="Напиши что-нибудь..." style="padding: 8px; border-radius: 20px; border: none; width: 70%;">
-    <button onclick="addMessage()" class="button-change" style="padding: 8px 15px;">Отправить</button>
-    <div id="messages" style="margin-top: 15px; text-align: left;"></div>
-</div>
 
-<script>
-    // Загружаем сообщения
-    let messages = JSON.parse(localStorage.getItem('messages')) || [];
-    
-    function showMessages() {
-        const container = document.getElementById('messages');
-        container.innerHTML = messages.map(msg => `💬 ${msg}`).join('<br>');
-    }
-    
-    function addMessage() {
-        const input = document.getElementById('messageInput');
-        if (input.value.trim()) {
-            messages.unshift(input.value.trim());
-            if (messages.length > 10) messages.pop();
-            localStorage.setItem('messages', JSON.stringify(messages));
-            showMessages();
-            input.value = '';
+    <br><br>
+
+    <!-- ===== ГОСТЕВАЯ КНИГА ===== -->
+    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 20px; width: 80%; max-width: 400px;">
+        <h3>📝 Гостевая книга</h3>
+        <input type="text" id="messageInput" placeholder="Напиши что-нибудь..." style="padding: 8px; border-radius: 20px; border: none; width: 70%;">
+        <button onclick="addMessage()" class="button-about" style="padding: 8px 15px;">Отправить</button>
+        <div id="messages" style="margin-top: 15px; text-align: left;"></div>
+    </div>
+
+    <script>
+        let messages = JSON.parse(localStorage.getItem('messages')) || [];
+        
+        function showMessages() {
+            const container = document.getElementById('messages');
+            container.innerHTML = messages.map(msg => `💬 ${msg}`).join('<br>');
         }
-    }
-    
-    showMessages();
-</script>
+        
+        function addMessage() {
+            const input = document.getElementById('messageInput');
+            if (input.value.trim()) {
+                messages.unshift(input.value.trim());
+                if (messages.length > 10) messages.pop();
+                localStorage.setItem('messages', JSON.stringify(messages));
+                showMessages();
+                input.value = '';
+            }
+        }
+        
+        showMessages();
+    </script>
     
     <!-- ===== КОД С СЕРДЕЧКАМИ ===== -->
     <script>
@@ -99,30 +101,44 @@
             }, 1000);
         });
     </script>
-    <!-- ===== КОНЕЦ КОДА С СЕРДЕЧКАМИ ===== -->
     
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-<script>
-    // Салют при загрузке
-    canvasConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-    
-    // И ещё один через секунду
-    setTimeout(() => {
-        canvasConfetti({ particleCount: 100, spread: 100, origin: { y: 0.5 } });
-    }, 500);
-</script>
-    <button onclick="toggleTheme()" class="button-change">🌙 Тёмная тема</button>
+    <!-- ===== САЛЮТ ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <script>
+        canvasConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        setTimeout(() => {
+            canvasConfetti({ particleCount: 100, spread: 100, origin: { y: 0.5 } });
+        }, 500);
+    </script>
 
-<script>
-    function toggleTheme() {
-        const body = document.body;
-        if (body.style.background.includes('ffb6c1')) {
-            body.style.background = "linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%)";
-        } else {
-            body.style.background = "linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%)";
+    <br>
+
+    <!-- ===== КНОПКА ТЁМНОЙ ТЕМЫ (ИСПРАВЛЕНА) ===== -->
+    <button id="themeToggle" class="button-theme">🌙 Тёмная тема</button>
+
+    <script>
+        let isDark = localStorage.getItem('theme') === 'dark';
+        
+        function applyTheme() {
+            const body = document.body;
+            if (isDark) {
+                body.style.background = "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)";
+                document.getElementById('themeToggle').innerHTML = "☀️ Светлая тема";
+            } else {
+                body.style.background = "linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%)";
+                document.getElementById('themeToggle').innerHTML = "🌙 Тёмная тема";
+            }
         }
-    }
-</script>
+        
+        function toggleTheme() {
+            isDark = !isDark;
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyTheme();
+        }
+        
+        applyTheme();
+        document.getElementById('themeToggle').onclick = toggleTheme;
+    </script>
     
 </body>
 </html>
