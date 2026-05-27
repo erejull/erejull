@@ -138,7 +138,9 @@
     <script>
         document.body.addEventListener('click', function(event) {
             let heart = document.createElement('div');
-            heart.innerHTML = '❤️';
+            let hearts = ['❤️', '💖', '💕', '💗', '💓', '💞', '🌸', '✨'];
+let randomHeart = hearts[Math.floor(Math.random() * hearts.length)];
+heart.innerHTML = randomHeart;
             heart.style.position = 'absolute';
             heart.style.left = (event.pageX - 15) + 'px';  
             heart.style.top = (event.pageY - 15) + 'px';   
