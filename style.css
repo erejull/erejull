@@ -1,11 +1,11 @@
 body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    font-family: 'Segoe UI', Arial, sans-serif;
     text-align: center;
+    font-family: Arial;
+    color: white;
     padding: 50px;
     min-height: 100vh;
 }
-
 h1 {
     color: white;
     font-size: 48px;
