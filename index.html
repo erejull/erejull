@@ -92,6 +92,18 @@
         canvasConfetti({ particleCount: 100, spread: 100, origin: { y: 0.5 } });
     }, 500);
 </script>
+    <button onclick="toggleTheme()" class="button-change">🌙 Тёмная тема</button>
+
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        if (body.style.background.includes('ffb6c1')) {
+            body.style.background = "linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%)";
+        } else {
+            body.style.background = "linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 100%)";
+        }
+    }
+</script>
     
 </body>
 </html>
