@@ -86,3 +86,11 @@ img {
     background-color: #ffcc00;
     transform: scale(1.05);
 }
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+h1 {
+    animation: bounce 2s infinite;
+}
