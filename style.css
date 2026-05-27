@@ -33,7 +33,6 @@ img {
 
 /* ===== КНОПКИ ===== */
 
-/* Кнопка "Узнать обо мне" */
 .button-about {
     background-color: #ff6b6b;
     color: white;
@@ -51,7 +50,6 @@ img {
     transform: scale(1.05);
 }
 
-/* Кнопка "Мои любимые фильмы и песни" */
 .button-favorites {
     background-color: #4ecdc4;
     color: white;
@@ -69,7 +67,6 @@ img {
     transform: scale(1.05);
 }
 
-/* Кнопка "Вернуться на главную" */
 .button-home {
     background-color: #ffd93d;
     color: #333;
@@ -86,12 +83,43 @@ img {
     background-color: #ffcc00;
     transform: scale(1.05);
 }
-/* Убираем текстовый курсор на всём сайте */
+
+/* ===== УБИРАЕМ СИНЮЮ РАМКУ ===== */
+*:focus {
+    outline: none;
+}
+
+button:focus, a:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* ===== УБИРАЕМ ТЕКСТОВЫЙ КУРСОР ===== */
 body, p, h1, a, button, div {
     cursor: default;
 }
 
-/* Но для кнопок оставляем руку (указатель) */
 a, button {
     cursor: pointer;
+}
+
+/* ===== АНИМИРОВАННЫЕ ЗВЁЗДОЧКИ НА ФОНЕ ===== */
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+body::before {
+    content: "✨💖✨⭐🌸";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    opacity: 0.15;
+    pointer-events: none;
+    animation: float 20s linear infinite;
+    white-space: pre;
+    overflow: hidden;
 }
