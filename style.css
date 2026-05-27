@@ -86,3 +86,12 @@ img {
     background-color: #ffcc00;
     transform: scale(1.05);
 }
+/* Убираем текстовый курсор на всём сайте */
+body, p, h1, a, button, div {
+    cursor: default;
+}
+
+/* Но для кнопок оставляем руку (указатель) */
+a, button {
+    cursor: pointer;
+}
