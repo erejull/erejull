@@ -23,5 +23,21 @@
 <a href="favorites.html" class="button-favorites">⭐ Мои любимые фильмы и песни</a>
     <br><br>
     <img src="https://i.pinimg.com/1200x/e7/cf/0e/e7cf0eadc111a67dbd74c74b8fd5f304.jpg" alt="Моя картинка" width="300">
+<br>
+<button onclick="changeImage()" class="button-home">🖼️ Сменить картинку</button>
+
+<script>
+    let images = [
+        "https://i.pinimg.com/736x/9a/1d/7a/9a1d7af87fa6b591af6eee9650ef0b7b.jpg",
+        "https://i.pinimg.com/474x/3e/c4/c7/3ec4c7843ec31e25c2f14a5bfb32aac4.jpg?nii=t",
+        "https://i.pinimg.com/474x/14/39/78/14397844cbd7e6883c355d2d970415a2.jpg?nii=t"
+    ];
+    let currentImage = 0;
+
+    function changeImage() {
+        currentImage = (currentImage + 1) % images.length;
+        document.querySelector('img').src = images[currentImage];
+    }
+</script>
 </body>
 </html>
