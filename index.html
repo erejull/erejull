@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Сайт посетили: <span id="counter">0</span> раз</p>
-    <script>
-        let count = localStorage.getItem('visits');
-        if (count === null) {
-            count = 1;
-        } else {
-            count = Number(count) + 1;
-        }
-        localStorage.setItem('visits', count);
-        document.getElementById('counter').innerText = count;
-    </script>
     
     <h1>Привет!</h1>
     
