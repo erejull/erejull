@@ -1,0 +1,24 @@
+body {
+    background-color: #f0f0f0;  /* цвет фона */
+    font-family: Arial, sans-serif;  /* шрифт */
+    text-align: center;  /* текст по центру */
+    padding: 50px;  /* отступы */
+}
+
+h1 {
+    color: #ff6b6b;  /* розовый цвет заголовка */
+    font-size: 48px;  /* размер шрифта */
+}
+
+p {
+    color: #333;  /* тёмно-серый текст */
+    font-size: 20px;  /* размер шрифта */
+    line-height: 1.5;  /* расстояние между строками */
+}
+
+img {
+    border-radius: 20px;  /* скругленные углы у картинки */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);  /* тень */
+    max-width: 100%;  /* чтобы картинка не вылезала */
+    height: auto;
+}
