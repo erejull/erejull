@@ -19,6 +19,15 @@
     </script>
     
     <h1>Привет!</h1>
+    <p id="datetime"></p>
+<script>
+    function updateDateTime() {
+        const now = new Date();
+        document.getElementById('datetime').innerHTML = '📅 ' + now.toLocaleString('ru-RU');
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+</script>
     <p>Узнайте обо мне</p>
     
     <a href="about.html" class="button-about">❤️ Узнать обо мне</a>
