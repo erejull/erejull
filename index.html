@@ -48,35 +48,91 @@
 
     <br><br>
 
-    <!-- ===== ГОСТЕВАЯ КНИГА ===== -->
-    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 20px; width: 80%; max-width: 400px;">
-        <h3>📝 Гостевая книга</h3>
-        <input type="text" id="messageInput" placeholder="Напиши что-нибудь..." style="padding: 8px; border-radius: 20px; border: none; width: 70%;">
+    <!-- ===== ГОСТЕВАЯ КНИГА (ОБНОВЛЁННАЯ) ===== -->
+<div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 20px; width: 80%; max-width: 450px; margin: 0 auto;">
+    <h3>📝 Гостевая книга</h3>
+    <p style="font-size: 14px; background: none; padding: 0;">Последние 5 сообщений:</p>
+    
+    <div id="messages" style="margin-top: 10px; margin-bottom: 15px; text-align: left; font-size: 14px; max-height: 200px; overflow-y: auto;"></div>
+    
+    <input type="text" id="guestName" placeholder="Твоё имя (необязательно)" style="padding: 8px; border-radius: 20px; border: none; width: 100%; margin-bottom: 10px; box-sizing: border-box;">
+    <div style="display: flex; gap: 10px;">
+        <input type="text" id="messageInput" placeholder="Напиши пожелание..." style="padding: 8px; border-radius: 20px; border: none; flex: 1;">
         <button onclick="addMessage()" class="button-about" style="padding: 8px 15px;">Отправить</button>
-        <div id="messages" style="margin-top: 15px; text-align: left;"></div>
     </div>
+</div>
 
-    <script>
-        let messages = JSON.parse(localStorage.getItem('messages')) || [];
-        
-        function showMessages() {
-            const container = document.getElementById('messages');
-            container.innerHTML = messages.map(msg => `💬 ${msg}`).join('<br>');
+<script>
+    // Загружаем сообщения (каждое содержит имя и текст)
+    let messages = JSON.parse(localStorage.getItem('guestbook')) || [];
+    
+    function showMessages() {
+        const container = document.getElementById('messages');
+        if (messages.length === 0) {
+            container.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center;">Пока нет сообщений. Будь первым! ✨</div>';
+            return;
         }
         
-        function addMessage() {
-            const input = document.getElementById('messageInput');
-            if (input.value.trim()) {
-                messages.unshift(input.value.trim());
-                if (messages.length > 10) messages.pop();
-                localStorage.setItem('messages', JSON.stringify(messages));
-                showMessages();
-                input.value = '';
-            }
+        // Показываем последние 5 сообщений (в обратном порядке - новые сверху)
+        let lastMessages = [...messages].reverse().slice(0, 5);
+        
+        container.innerHTML = lastMessages.map(msg => {
+            const nameText = msg.name ? `<strong>${escapeHtml(msg.name)}</strong>` : '<strong>Аноним</strong>';
+            return `<div style="background: rgba(255,255,255,0.15); padding: 8px 12px; border-radius: 15px; margin-bottom: 8px;">
+                        ${nameText} · <span style="font-size: 12px; opacity: 0.7;">${msg.time}</span>
+                        <div style="margin-top: 4px;">💬 ${escapeHtml(msg.text)}</div>
+                    </div>`;
+        }).join('');
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function addMessage() {
+        const nameInput = document.getElementById('guestName');
+        const textInput = document.getElementById('messageInput');
+        
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        
+        if (text === "") {
+            alert("Напиши что-нибудь!");
+            return;
         }
         
+        // Получаем текущее время
+        const now = new Date();
+        const timeStr = now.toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+        
+        // Добавляем сообщение
+        messages.push({
+            name: name || null,
+            text: text,
+            time: timeStr
+        });
+        
+        // Ограничиваем общее количество сообщений (не больше 30)
+        if (messages.length > 30) {
+            messages = messages.slice(-30);
+        }
+        
+        // Сохраняем
+        localStorage.setItem('guestbook', JSON.stringify(messages));
+        
+        // Очищаем поля
+        nameInput.value = '';
+        textInput.value = '';
+        
+        // Обновляем отображение
         showMessages();
-    </script>
+    }
+    
+    // Показываем сообщения при загрузке
+    showMessages();
+</script>
     
     <!-- ===== КОД С СЕРДЕЧКАМИ ===== -->
     <script>
