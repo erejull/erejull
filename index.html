@@ -25,7 +25,19 @@
     <img src="https://i.pinimg.com/1200x/e7/cf/0e/e7cf0eadc111a67dbd74c74b8fd5f304.jpg" alt="Моя картинка" width="300">
     <br>
     <button onclick="changeImage()" class="button-about">🖼️ Сменить картинку</button>
+    <br>
+<button onclick="like()" class="button-favorites">❤️ Лайк (<span id="likeCount">0</span>)</button>
+
+<script>
+    let likes = localStorage.getItem('likes') || 0;
+    document.getElementById('likeCount').innerText = likes;
     
+    function like() {
+        likes++;
+        localStorage.setItem('likes', likes);
+        document.getElementById('likeCount').innerText = likes;
+    }
+</script>
     <br><br>
     
     <!-- ===== КНОПКИ НАВИГАЦИИ ===== -->
