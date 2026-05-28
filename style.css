@@ -132,26 +132,7 @@ a, button {
     cursor: pointer;
 }
 
-/* ===== АНИМИРОВАННЫЕ ЗВЁЗДОЧКИ НА ФОНЕ ===== */
-@keyframes float {
-    0% { transform: translateY(0px) rotate(0deg); }
-    100% { transform: translateY(-100px) rotate(360deg); }
-}
 
-body::before {
-    content: "✨💖✨⭐🌸";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 30px;
-    opacity: 0.15;
-    pointer-events: none;
-    animation: float 20s linear infinite;
-    white-space: pre;
-    overflow: hidden;
-}
 
 /* ===== ВСЁ ПО ЦЕНТРУ ===== */
 p, h1, a, button {
